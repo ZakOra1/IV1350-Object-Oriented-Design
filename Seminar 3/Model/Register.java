@@ -1,12 +1,11 @@
-package Model;
+package se.kth.iv1350.cashiersystem.model;
 
 public class Register {
 
 	private double balance;
-
 	private Payment payment;
 
-	public Register Register() {
+	public Register() {
 		return null;
 	}
 

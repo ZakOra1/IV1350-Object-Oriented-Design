@@ -1,14 +1,15 @@
-package Model;
+package se.kth.iv1350.cashiersystem.model;
 
-import DTO.SaleDTO;
-import Controller.Controller;
-import Integration.ExternalInventory;
-import DTO.ItemDTO;
+import se.kth.iv1350.cashiersystem.dto.SaleDTO;
+import se.kth.iv1350.cashiersystem.dto.ItemDTO;
+import se.kth.iv1350.cashiersystem.integration.ExternalInventory;
+
 
 public class Sale {
 
 	private SaleDTO currentSale;
 	private ExternalInventory inventory;
+
 	/**
 	 * Constructor for Sale
 	 * @param saleDTO The sale data transfer object
@@ -17,35 +18,32 @@ public class Sale {
 		this.currentSale = sale;
 	}
 
-	// TODO: Implementera removeItem funktion
-
 	/**
 	 * Adds an item to the sale if it exists in stock
 	 * @param item The item to add
 	 */
 	public void addItem(String itemID) {
-		// Get current quantity of item in the sale
 		int currentQuantity = currentSale.quantityOfItemScanned(itemID);
-
-		// Check quantity of item in stock
 		ItemDTO itemAvailable = inventory.getItem(itemID, currentQuantity + 1);
 
 		if(itemAvailable != null) {
-			// If item is in stock, add it to the sale
-			currentSale.additem(itemAvailable);
+			currentSale.addItemToSale(itemAvailable);
 		} else {
-			// If item is not in stock, show error message
 			System.out.println("Item not in stock");
 		}
 	}
 
 	/**
-	 *  
+	 * Returns the current total price of the sale
+	 * @return The current total price of the sale
 	 */
-	public void updateTotalPrice() {
-
+	public int getTotalPrice() {
+		return currentSale.getTotalPrice();
 	}
 
+	/**
+	 * Ends the current sale and updates the inventory accordingly
+	 */
 	public void endSale() {
 		// Update inventory
 		inventory.updateInventory(currentSale);

@@ -1,36 +1,39 @@
-package DTO;
+package se.kth.iv1350.cashiersystem.dto;
 
 import java.util.ArrayList;
 
 public class SaleDTO {
 
 	private ArrayList<ItemDTO> itemList = new ArrayList<>();
-	private int priceTotal;
+	private int totalPrice;
 	private java.time.LocalDateTime dateTime;
 
 	/**
 	 * Constructor for SaleDTO
 	 */
 	public SaleDTO() {
+		this.dateTime = java.time.LocalDateTime.now();
+		this.totalPrice = 0;
+		this.itemList = new ArrayList<>();
 	}
 
 	public double getTotalPrice() {
-		return priceTotal;
+		return totalPrice;
 	}
 
-	public void additem(ItemDTO item) {
+	public void addItemToSale(ItemDTO item) {
 		itemList.add(item);
-		priceTotal += item.getPriceIncVat();
+		totalPrice += item.getPriceIncVat();
 	}
 
 	public int quantityOfItemScanned(String itemID) {
-		int currentQuantityInList = 0;
+		int currentQuantityInSale = 0;
 		for (ItemDTO item: itemList) {
 			if (item.getID() == itemID) {
-				currentQuantityInList += 1;
+				currentQuantityInSale += 1;
 			}
 		}
-		return currentQuantityInList;
+		return currentQuantityInSale;
 	}
 
 	public ArrayList<ItemDTO> getItems() {
@@ -45,9 +48,5 @@ public class SaleDTO {
 		this.dateTime = dateTime;
 	}
 
-	public void removeItem(ItemDTO item) {
-		itemList.remove(item);
-		priceTotal -= item.getPriceIncVat();
-	}
 
 }

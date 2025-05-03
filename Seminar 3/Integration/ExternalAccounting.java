@@ -1,8 +1,8 @@
-package Integration;
+package se.kth.iv1350.cashiersystem.integration;
 
-import DTO.SaleDTO;
-import Model.Payment;
-import Model.Sale;
+import se.kth.iv1350.cashiersystem.dto.SaleDTO;
+import se.kth.iv1350.cashiersystem.model.Payment;
+import se.kth.iv1350.cashiersystem.model.Sale;
 
 public class ExternalAccounting {
 

@@ -1,4 +1,4 @@
-package DTO;
+package se.kth.iv1350.cashiersystem.dto;
 
 public class ItemDTO {
 

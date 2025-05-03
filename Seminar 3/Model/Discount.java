@@ -1,24 +1,19 @@
-package Model;
+package se.kth.iv1350.cashiersystem.model;
 
-import DTO.SaleDTO;
-import Integration.DiscountDatabase;
-import Controller.Controller;
+import se.kth.iv1350.cashiersystem.dto.SaleDTO;
+import se.kth.iv1350.cashiersystem.integration.DiscountDatabase;
+import se.kth.iv1350.cashiersystem.controller.Controller;
 
+/**
+ * Det här borde vi omdesigna helt, eller så förstår jag bara inte vad det är vi ska göra.
+*/
 public class Discount {
-
-	private SaleDTO sale;
-
-	private int customerID;
-
-	private DiscountDatabase discountDatabase;
-
-	private Controller controller;
-
-	public Discount Discount(SaleDTO sale, int customerID) {
-		return null;
+	
+	public Discount getDiscount(DiscountDatabase data) {
+		return Discount(sale, customerID;
 	}
 
-	public Discount getDiscount(DiscountDatabase data) {
+	public Discount Discount(SaleDTO sale, int customerID) {
 		return null;
 	}
 

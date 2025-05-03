@@ -6,19 +6,12 @@ import Integration.ExternalInventory;
 public class Payment {
 
 	private double customerPayment;
-
 	private double change;
-
 	private double totalPrice;
-
 	private Sale sale;
-
 	private Receipt receipt;
-
 	private Register register;
-
 	private ExternalAccounting externalAccounting;
-
 	private ExternalInventory externalInventory;
 
 	/**

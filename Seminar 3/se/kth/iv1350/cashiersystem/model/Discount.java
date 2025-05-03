@@ -10,7 +10,7 @@ import se.kth.iv1350.cashiersystem.controller.Controller;
 public class Discount {
 	
 	public Discount getDiscount(DiscountDatabase data) {
-		return Discount(sale, customerID;
+		return Discount(sale, customerID);
 	}
 
 	public Discount Discount(SaleDTO sale, int customerID) {

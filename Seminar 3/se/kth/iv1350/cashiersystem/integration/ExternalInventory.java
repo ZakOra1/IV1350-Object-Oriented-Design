@@ -1,30 +1,35 @@
 package se.kth.iv1350.cashiersystem.integration;
 
+import java.util.ArrayList;
+
 import se.kth.iv1350.cashiersystem.dto.ItemDTO;
 import se.kth.iv1350.cashiersystem.dto.SaleDTO;
 import se.kth.iv1350.cashiersystem.model.Sale;
 
 public class ExternalInventory {
 
-	Arraylist<ItemDTO> itemInInventory;
+	private java.util.HashMap<String, ItemDTO, Integer> inventory = new java.util.HashMap<>();
 
 	/**
 	 * Constructor for ExternalInventory
 	 * Adds some items to the inventory for testing purposes (Later: Actually added from constructor)
 	 */
 	public ExternalInventory() {
-		this.itemInInventory = new ArrayList<ItemDTO>();
+		this.inventory = new ArrayList<ItemDTO>();
+
 
 
 		/**
 		 * Lägg till dom här i view eller controller
 		 * 		inventory.put("abc123", new ItemDTO("abc123", "BigWheel Oatmeal", 29.90, 6, "BigWheel Oatmeal 500g, whole grain oats, high fiber, gluten free", 2));
 		inventory.put("def456", new ItemDTO("def456", "YouGoGo Blueberry", 14.90, 6, "YouGoGo Blueberry 240g, low sugar yoghurt, blueberry flavour", 1));
+		*/
 	}
-		 */
 
-
-	
+	public void addItemToInventory(ItemDTO item) {
+		itemInInventory.add(item);
+		inventory.put(item.getID(), item);
+	}
 
 	/**
 	 * Method to check if an item is in stock.
@@ -35,9 +40,10 @@ public class ExternalInventory {
 	 */
 	public ItemDTO getItem(String id, int quantity) {
 		ItemDTO item = inventory.get(id);
-		for (item : itemInInventory) {
-			if (item != null && item.getQuantity() >= quantity) {
-				return item;
+		for (ItemDTO itemInList : itemInInventory) {
+			if (itemInList != null && itemInList.getQuantity() >= quantity) {
+				return itemInList;
+			}
 		}
 		return null;
 	}
@@ -56,5 +62,5 @@ public class ExternalInventory {
 		}
 	}
 	
-
+	}
 }

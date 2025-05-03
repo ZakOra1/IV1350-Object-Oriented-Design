@@ -54,4 +54,8 @@ public class Sale {
 		return null;
 	}
 
+	public SaleDTO getSale() {
+		return currentSale;
+	}
+
 }

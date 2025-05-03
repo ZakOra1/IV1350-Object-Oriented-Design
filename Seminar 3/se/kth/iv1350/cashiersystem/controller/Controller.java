@@ -1,15 +1,19 @@
 package se.kth.iv1350.cashiersystem.controller;
 
 import se.kth.iv1350.cashiersystem.model.Sale;
+import se.kth.iv1350.cashiersystem.integration.DiscountDatabase;
+import se.kth.iv1350.cashiersystem.integration.ExternalAccounting;
+import se.kth.iv1350.cashiersystem.integration.ExternalInventory;
+import se.kth.iv1350.cashiersystem.integration.Printer;
 import se.kth.iv1350.cashiersystem.model.Discount;
+import se.kth.iv1350.cashiersystem.model.Register;
 
 public class Controller {
 
 	private Sale sale;
 	private Register register;
 
-
-	public Controller(Register register) {
+	public Controller(ExternalInventory externalInventory, ExternalAccounting externalAccounting, DiscountDatabase discountDatabase, Printer printer, Register register) {
 		this.register = register;
 	}
 
@@ -17,7 +21,7 @@ public class Controller {
 	 *  Starts a new sale. 
 	 */
 	public void initializeSale() {
-		sale = new Sale(); //TODO: Vad ska vi egentligen ha här för konstruktorn? Behövs det ens något?
+		this.sale = new Sale(); //TODO: Vad ska vi egentligen ha här för konstruktorn? Behövs det ens något?
 
 	}
 

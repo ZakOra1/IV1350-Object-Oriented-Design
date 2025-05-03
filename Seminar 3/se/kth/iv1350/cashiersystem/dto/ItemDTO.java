@@ -28,9 +28,22 @@ public class ItemDTO {
 		this.quantity = quantity;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public double getTotalPrice() {
+		return price * quantity;
+	}
+
 	public int getQuantity() {
 		return quantity;
 	}
+	
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
@@ -40,7 +53,11 @@ public class ItemDTO {
 	}
 
 	public double getPriceIncVat() {
-		return price * (vatRate / PERCENT_CONVERSION);
+		return getTotalPrice() * (vatRate / PERCENT_CONVERSION);
+	}
+
+	public double getVATAmount() {
+		return getPriceIncVat() - getTotalPrice();
 	}
 
 	public String getDescription() {

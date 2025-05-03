@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class SaleDTO {
 
 	private ArrayList<ItemDTO> itemList = new ArrayList<>();
-	private int totalPrice;
+	private double totalPrice;
+	private double totalVAT;
 	private java.time.LocalDateTime dateTime;
 
 	/**
@@ -24,6 +25,7 @@ public class SaleDTO {
 	public void addItemToSale(ItemDTO item) {
 		itemList.add(item);
 		totalPrice += item.getPriceIncVat();
+		totalVAT += item.getVATAmount();
 	}
 
 	public int quantityOfItemScanned(String itemID) {
@@ -46,6 +48,10 @@ public class SaleDTO {
 
 	public void setDateTime(java.time.LocalDateTime dateTime) {
 		this.dateTime = dateTime;
+	}
+
+	public double getVATAmount() {
+		return totalVAT;
 	}
 
 

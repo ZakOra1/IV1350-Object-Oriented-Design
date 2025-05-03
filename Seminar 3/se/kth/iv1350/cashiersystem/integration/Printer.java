@@ -2,6 +2,9 @@ package se.kth.iv1350.cashiersystem.integration;
 
 import se.kth.iv1350.cashiersystem.model.Receipt;
 import se.kth.iv1350.cashiersystem.model.Sale;
+import se.kth.iv1350.cashiersystem.dto.SaleDTO;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Printer {
 
@@ -18,14 +21,10 @@ public class Printer {
 
 	/**
 	 * Print the receipt object.
-	 * @param sale The the information to be printed.
+	 * @param receipt The receipt object to be printed.
 	 */
-	public void printReceipt(Sale sale) {
-		
-		/**
-		 * Print receipt?
-		*/
-
+	public void printReceipt(String receipt) {
+		System.out.println(receipt);
 	}
 
 }

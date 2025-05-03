@@ -7,14 +7,12 @@ import se.kth.iv1350.cashiersystem.model.Sale;
 public class ExternalAccounting {
 
 	private SaleDTO transactionRecords;
-
 	private Payment payment;
 
 	/**
 	 *  
 	 */
-	public ExternalAccounting ExternalAccounting() {
-		return null;
+	public ExternalAccounting() {
 	}
 
 	public void updateAccounting(Sale sale) {

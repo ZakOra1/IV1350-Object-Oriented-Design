@@ -40,11 +40,8 @@ public class View {
 	 * @param scannedItem The item that just got scanned by the cashier
 	 */
 	public void printScannedItemInfo(ItemDTO scannedItem) {
-		if(scannedItem == null) {
-			System.out.println("Item not found in inventory.\n\n");
-			return;
-		}
 		System.out.println("Item ID: " + scannedItem.getID() + 
+						"\nItem quantity: " + scannedItem.getSaleQuantity() +
 						"\nItem name: " + scannedItem.getName() + 
 						"\nItem cost: " + scannedItem.getPrice() + 
 						"\nVAT: " + scannedItem.getVatRate() + "%" +

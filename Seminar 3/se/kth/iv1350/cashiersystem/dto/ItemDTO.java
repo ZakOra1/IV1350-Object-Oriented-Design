@@ -5,9 +5,11 @@ public class ItemDTO {
 	private String id;
 	private String name;
 	private double price;
-	private int vatRate;
+	private double vatRate;
 	private String description;
-	private int quantity;
+	private int quantityInSale;
+	private int quantityInStock;
+
 	private static final int PERCENT_CONVERSION = 100;
 
 	/**
@@ -17,15 +19,20 @@ public class ItemDTO {
 	 * @param price The price of the item
 	 * @param vatRate The VAT rate of the item
 	 * @param description The description of the item
-	 * @param quantity The current quantity of the item
+	 * @param quantityInStock The current available quantity of the item
 	 */
-	public ItemDTO(String id, String name, double price, int vatRate, String description, int quantity) {
+	public ItemDTO(String id, String name, double price, double vatRate, String description, int quantityInStock) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.vatRate = vatRate;
 		this.description = description;
-		this.quantity = quantity;
+		this.quantityInSale = 0;
+		this.quantityInStock = quantityInStock;
+	}
+
+	public double getVatRate() {
+		return vatRate;
 	}
 
 	public String getName() {
@@ -37,27 +44,36 @@ public class ItemDTO {
 	}
 
 	public double getTotalPrice() {
-		return price * quantity;
+		return price * quantityInSale;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public void setStockQuantity(int quantity) {
+		this.quantityInStock = quantity;
+	}
+
+	public int getStockQuantity() {
+		return quantityInStock;
+	}
+
+	public int getSaleQuantity() {
+		return quantityInSale;
 	}
 	
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setSaleQuantity(int quantity) {
+		this.quantityInSale = quantity;
+	}
+
+	public int getAvailableQuantity() {
+		return quantityInStock - quantityInSale;
 	}
 
 	public String getID() {
 		return id;
 	}
 
-	public double getPriceIncVat() {
-		return getTotalPrice() * (vatRate / PERCENT_CONVERSION);
-	}
-
-	public double getVATAmount() {
-		return getPriceIncVat() - getTotalPrice();
+	public double getVatAmount() {
+		double priceExcludingVat = price / (1 + vatRate / PERCENT_CONVERSION);
+		return price - priceExcludingVat;
 	}
 
 	public String getDescription() {

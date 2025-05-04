@@ -1,6 +1,7 @@
 package se.kth.iv1350.cashiersystem.view;
 
 import se.kth.iv1350.cashiersystem.controller.Controller;
+import se.kth.iv1350.cashiersystem.dto.ItemDTO;
 
 
 /**
@@ -8,7 +9,7 @@ import se.kth.iv1350.cashiersystem.controller.Controller;
  * It is not a "real" view, instead it will use hardcoded calls to the system operations in the controller.
  */
 public class View {
-	Private Controller contr;
+	private Controller contr;
 
 	/**
 	 * Constructor for the view class. 
@@ -23,22 +24,33 @@ public class View {
 	 * Hardcoded method used to simulate a sale
 	 */
 	public void sampleExecution() {
-
-		/**
-		 * Lägg in kommandon för att  
-		 * starta en sale
-		 * scanna items som är hårdkodade i inventoryn
-		 * avsluta sale
-		 * kolla discount (extern databas så lite oklart hur vi ska göra det)
-		 * skapa kvitto
-		 * säg åt printer att skriva ut kvittot
-		 */
-
-		 contr.initiateSale();
-		 /**
-		  * Scanna items som vi hårdkodat i inventoryn
-		  */
-
+		System.out.println("Starting a new sale...\n");
+		contr.initializeSale();
+		ItemDTO item1 = contr.scanItem("abc123", 2);
+		printScannedItemInfo(item1);
+		ItemDTO item2 = contr.scanItem("def456", 1); 
+		printScannedItemInfo(item2);
+		contr.endSale();
+		
 	}
+	
+	/**
+	 * Prints information for each scanned item along with the running total
+	 * @param scannedItem The item that just got scanned by the cashier
+	 */
+	public void printScannedItemInfo(ItemDTO scannedItem) {
+		System.out.println("Item ID: " + scannedItem.getID() + 
+						"\nItem name: " + scannedItem.getName() + 
+						"\nItem cost: " + scannedItem.getPrice() + 
+						"\nVAT: " + scannedItem.getVatRate() + "%" +
+						"\nItem quantity: " + scannedItem.getSaleQuantity() +
+						"\nItem description: " + scannedItem.getDescription()
+						);
+
+		System.out.println("Total cost (incl VAT): " + String.format("%.2f", contr.getSale().getTotalPrice()));
+		System.out.println("Total VAT: " + String.format("%.2f", contr.getSale().getTotalVat()));
+	}
+
+
 
 }

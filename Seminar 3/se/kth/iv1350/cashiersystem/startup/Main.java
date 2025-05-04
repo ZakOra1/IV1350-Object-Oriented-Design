@@ -7,13 +7,17 @@ import se.kth.iv1350.cashiersystem.model.Register;
 import se.kth.iv1350.cashiersystem.integration.DiscountDatabase;
 import se.kth.iv1350.cashiersystem.integration.ExternalAccounting;
 import se.kth.iv1350.cashiersystem.integration.ExternalInventory;
+import se.kth.iv1350.cashiersystem.dto.ItemDTO;
+import se.kth.iv1350.cashiersystem.dto.SaleDTO;
+
 
 
 
 public class Main {
 
-	public static void main(String args) {
+	public static void main(String[] args) {
 		ExternalInventory externalInventory = new ExternalInventory();
+		populateInventory(externalInventory);
 		ExternalAccounting externalAccounting = new ExternalAccounting();
 		DiscountDatabase discountDatabase = new DiscountDatabase();
 		Printer printer = new Printer();
@@ -21,15 +25,17 @@ public class Main {
 		Controller contr = new Controller(externalInventory, externalAccounting, discountDatabase, printer, register);
 		View view = new View(contr);
 		
-		view.sampleExecution();
-
 		
 
+		view.sampleExecution();
 	}
 
+	
 	private static void populateInventory(ExternalInventory inventory) {
-        inventory.addItem("abc123", "BigWheel Oatmeal", "29:90", 6, "BigWheel Oatmeal 500 g, whole grain oats, high fiber, gluten free");
-        inventory.addItem("def456", "YouGoGo Blueberry", "14:90", 6, "YouGoGo Blueberry 240 g, low sugar yoghurt, blueberry flavour");
+		ItemDTO item1 = new ItemDTO("abc123", "BigWheel Oatmeal", 29.90, 6, "BigWheel Oatmeal 500 g, whole grain oats, high fiber, gluten free", 20);
+        ItemDTO item2 = new ItemDTO("def456", "YouGoGo Blueberry", 14.90, 6, "YouGoGo Blueberry 240 g, low sugar yoghurt, blueberry flavour", 30);
+		inventory.addItemToInventory(item1);
+		inventory.addItemToInventory(item2);
     }
 
 }

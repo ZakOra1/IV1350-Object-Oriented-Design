@@ -1,28 +1,32 @@
-package Model;
+package se.kth.iv1350.cashiersystem.model;
 
-import Integration.ExternalAccounting;
-import Integration.ExternalInventory;
+import se.kth.iv1350.cashiersystem.integration.ExternalAccounting;
+import se.kth.iv1350.cashiersystem.dto.SaleDTO;
+import java.time.LocalDateTime;
 
 public class Payment {
 
-	private double customerPayment;
+	private double paidAmount;
 	private double change;
-	private double totalPrice;
 	private Sale sale;
-	private Receipt receipt;
-	private Register register;
-	private ExternalAccounting externalAccounting;
-	private ExternalInventory externalInventory;
+
+	private java.time.LocalDateTime dateTime;
+
 
 	/**
 	 *  
 	 */
-	public Payment Payment(double customerPayment, double totalPrice) {
-		return null;
+	public Payment(double paid, Sale sale) {
+		this.dateTime = java.time.LocalDateTime.now();
+		this.paidAmount = paid;
+		this.sale = sale;
 	}
 
-	public double calculateChange() {
-		return 0;
+	public void calculateChange() {
+		double totalPrice = this.sale.getTotalPrice();
+		double discountedPrice = totalPrice - this.sale.addDiscount();
+		this.change = discountedPrice - totalPrice;
+		
 	}
 
 }

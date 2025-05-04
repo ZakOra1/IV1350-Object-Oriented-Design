@@ -7,14 +7,13 @@ public class SaleDTO {
 	private ArrayList<ItemDTO> itemList = new ArrayList<>();
 	private double totalPrice;
 	private double totalVAT;
-	private java.time.LocalDateTime dateTime;
 
 	/**
 	 * Constructor for SaleDTO
 	 */
 	public SaleDTO() {
-		this.dateTime = java.time.LocalDateTime.now();
 		this.totalPrice = 0;
+		this.totalVAT = 0;
 		this.itemList = new ArrayList<>();
 	}
 
@@ -24,8 +23,8 @@ public class SaleDTO {
 
 	public void addItemToSale(ItemDTO item) {
 		itemList.add(item);
-		totalPrice += item.getPriceIncVat();
-		totalVAT += item.getVATAmount();
+		totalPrice += item.getPrice();
+		totalVAT += item.getVatAmount();
 	}
 
 	public int quantityOfItemScanned(String itemID) {
@@ -42,16 +41,12 @@ public class SaleDTO {
 		return itemList;
 	}
 
-	public java.time.LocalDateTime getDateTime() {
-		return dateTime;
-	}
-
-	public void setDateTime(java.time.LocalDateTime dateTime) {
-		this.dateTime = dateTime;
-	}
-
 	public double getVATAmount() {
 		return totalVAT;
+	}
+
+	public double addDiscount() {
+		return 0.0;
 	}
 
 

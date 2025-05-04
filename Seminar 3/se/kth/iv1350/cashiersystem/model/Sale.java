@@ -14,22 +14,25 @@ public class Sale {
 	 * Constructor for Sale
 	 * @param saleDTO The sale data transfer object
 	 */
-	public Sale(SaleDTO sale) {
-		this.currentSale = sale;
+	public Sale(ExternalInventory inventory) {
+		this.inventory = inventory;
+		this.currentSale = new SaleDTO();
 	}
 
 	/**
 	 * Adds an item to the sale if it exists in stock
 	 * @param item The item to add
 	 */
-	public void addItem(String itemID) {
+	public ItemDTO addItem(String itemID) {
 		int currentQuantity = currentSale.quantityOfItemScanned(itemID);
 		ItemDTO itemAvailable = inventory.getItem(itemID, currentQuantity + 1);
 
 		if(itemAvailable != null) {
 			currentSale.addItemToSale(itemAvailable);
+			itemAvailable.setSaleQuantity(currentQuantity + 1);
+			return itemAvailable;
 		} else {
-			System.out.println("Item not in stock");
+			return null;
 		}
 	}
 
@@ -37,21 +40,19 @@ public class Sale {
 	 * Returns the current total price of the sale
 	 * @return The current total price of the sale
 	 */
-	public int getTotalPrice() {
+	public double getTotalPrice() {
 		return currentSale.getTotalPrice();
+	}
+
+	public double getTotalVat() {
+		return currentSale.getVATAmount();
 	}
 
 	/**
 	 * Ends the current sale and updates the inventory accordingly
 	 */
 	public void endSale() {
-		// Update inventory
 		inventory.updateInventory(currentSale);
-
-	}
-
-	public Discount addDiscount(Discount saleDiscount) {
-		return null;
 	}
 
 	public SaleDTO getSale() {

@@ -12,7 +12,7 @@ public class Register {
 
 	public void PrintReceipt(Receipt receipt) {
 		Printer printer = new Printer();
-		printer.printReceipt(receipt);
+		//printer.printReceipt(receipt);
 	}
 
 	public void deposit(double customerPayment) {

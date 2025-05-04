@@ -1,23 +1,24 @@
 package se.kth.iv1350.cashiersystem.integration;
 
 import java.util.HashMap;
-
 import se.kth.iv1350.cashiersystem.dto.ItemDTO;
 import se.kth.iv1350.cashiersystem.dto.SaleDTO;
 import se.kth.iv1350.cashiersystem.model.Sale;
 
 public class ExternalInventory {
-
 	private HashMap<String, ItemDTO> inventory;
 
 	/**
 	 * Constructor for ExternalInventory
-	 * Adds some items to the inventory for testing purposes (Later: Actually added from constructor)
 	 */
 	public ExternalInventory() {
 		this.inventory = new HashMap<String, ItemDTO>();
 	}
 
+	/**
+	 * Adds an item to the inventory
+	 * @param item The item to add to the inventory
+	 */
 	public void addItemToInventory(ItemDTO item) {
 		inventory.put(item.getID(), item);
 	}
@@ -35,7 +36,7 @@ public class ExternalInventory {
 
 		for(ItemDTO itemInList : inventory.values()) {
 			if (itemInList.getID().equals(id) && 
-			(itemInList.getAvailableQuantity() >= quantity)) {
+			(itemInList.getStockQuantity() >= quantity)) {
 				return itemInList;
 			}
 		}

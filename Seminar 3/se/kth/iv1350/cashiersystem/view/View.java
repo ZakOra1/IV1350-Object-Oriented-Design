@@ -24,7 +24,7 @@ public class View {
 	 * Hardcoded method used to simulate a sale
 	 */
 	public void sampleExecution() {
-		System.out.println("Starting a new sale...\n");
+		System.out.println("Starting a new sale.\n");
 		contr.initializeSale();
 		ItemDTO item1 = contr.scanItem("abc123", 2);
 		printScannedItemInfo(item1);
@@ -33,7 +33,6 @@ public class View {
 		ItemDTO item3 = contr.scanItem("def456", 1); 
 		printScannedItemInfo(item3);
 		contr.endSale();
-		
 	}
 	
 	/**
@@ -41,6 +40,10 @@ public class View {
 	 * @param scannedItem The item that just got scanned by the cashier
 	 */
 	public void printScannedItemInfo(ItemDTO scannedItem) {
+		if(scannedItem == null) {
+			System.out.println("Item not found in inventory.\n\n");
+			return;
+		}
 		System.out.println("Item ID: " + scannedItem.getID() + 
 						"\nItem name: " + scannedItem.getName() + 
 						"\nItem cost: " + scannedItem.getPrice() + 
@@ -48,11 +51,7 @@ public class View {
 						"\nItem description: " + scannedItem.getDescription() +
 						"\n"				
 						);
-
 		System.out.println("Total cost (incl VAT): " + String.format("%.2f", contr.getSale().getTotalPrice()));
 		System.out.println("Total VAT: " + String.format("%.2f", contr.getSale().getTotalVat()) + "\n\n");
 	}
-
-
-
 }

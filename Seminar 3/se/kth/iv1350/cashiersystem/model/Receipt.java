@@ -8,11 +8,15 @@ import se.kth.iv1350.cashiersystem.dto.SaleDTO;
 import se.kth.iv1350.cashiersystem.integration.Printer;
 
 public class Receipt {
-
 	private SaleDTO sale;
 	private LocalDateTime timeOfSale;
 	private Payment customerPayment;
 
+	/**
+	 * Creates an instance of Receipt.
+	 * @param sale The sale object containing the items and their prices.
+	 * @param customerPayment The payment object containing the amount paid by the customer.
+	 */
 	public Receipt(SaleDTO sale, Payment customerPayment) {	
 		this.sale = sale;
 		this.customerPayment = customerPayment;
@@ -21,12 +25,14 @@ public class Receipt {
 		this.timeOfSale.format(formatter);
 	}
 
+	/**
+	 * Constructs the receipt
+	 * @return A string representation of the receipt.
+	 */
 	public String getReceipt() {
 		StringBuilder receipt = new StringBuilder();
 		receipt.append("------------------ Begin receipt ------------------\n");
 		receipt.append("Time of Sale : " + timeOfSale + "\n\n");
-		//append(sale.getDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))).append("\n\n");
-
 		for (ItemDTO item : sale.getItems()) {
 			receipt.append(item.getName())
 				   .append("    ")
@@ -43,9 +49,6 @@ public class Receipt {
 		receipt.append("VAT : ").append(String.format("%.2f", sale.getVATAmount())).append("SEK").append("\n\n");
 		receipt.append("Cash: " + customerPayment.getPaidAmount()).append(" SEK\n");
 		receipt.append("Change: ").append(String.format("%.2f", customerPayment.getChange())).append(" SEK\n");
-		
-		//receipt.append("Cash : ").append(String.format("%.2f", sale.getPaidAmount())).append(" SEK\n");
-		//receipt.append("Change : ").append(String.format("%.2f", sale.getChange())).append(" SEK\n");
 		receipt.append("------------------ End receipt ------------------\n");
 
 		return receipt.toString();

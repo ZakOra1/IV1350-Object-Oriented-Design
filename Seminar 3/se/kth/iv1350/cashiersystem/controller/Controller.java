@@ -1,6 +1,5 @@
 package se.kth.iv1350.cashiersystem.controller;
 
-
 import se.kth.iv1350.cashiersystem.dto.ItemDTO;
 import se.kth.iv1350.cashiersystem.integration.DiscountDatabase;
 import se.kth.iv1350.cashiersystem.integration.ExternalAccounting;
@@ -20,7 +19,6 @@ public class Controller {
 	private Receipt receipt;
 	private Printer printer;
 	private Register register;
-
 
 	/**
 	 * Constructor for the Controller class
@@ -53,7 +51,6 @@ public class Controller {
 	 * @return The ItemDTO of the item with the provided ID
 	 */
 	public ItemDTO scanItem(String itemID, int quantity) {
-		boolean itemSuccessfullyAdded = false;
 		ItemDTO addedItem = null;
 		for(int currentItemsAdded = 0; currentItemsAdded < quantity; currentItemsAdded++) {
 			addedItem = sale.addItem(itemID);
@@ -61,14 +58,22 @@ public class Controller {
 		return addedItem;
 	}
 
+	/**
+	 * "Fake" method for checking if a discount is available.
+	 */
 	public void checkDiscount() {
-
 	}
 
+	/**
+	 * Adds discount to the current sale.
+	 */
 	public void applyDiscount(Discount discount) {
 		sale.addDiscount(discount);
 	}
 
+	/**
+	 * Method for ending the current sale. Handles the payment process and updates the external systems.
+	 */
 	public void endSale() {
 		Payment customerPayment = new Payment(100, sale.getSale());
 		customerPayment.calculateChange();
@@ -81,8 +86,11 @@ public class Controller {
 		register.deposit(amountToDeposit);
 	}
 
+	/**
+	 * Returns the current sale.
+	 * @return The current sale object.
+	 */
 	public Sale getSale() {
 		return sale;
 	}
-
 }

@@ -4,8 +4,6 @@ import se.kth.iv1350.cashiersystem.dto.SaleDTO;
 import se.kth.iv1350.cashiersystem.model.Receipt;
 import se.kth.iv1350.cashiersystem.model.Sale;
 
-
-
 public class Printer {
 
 	/**
@@ -21,5 +19,4 @@ public class Printer {
 	public void printReceipt(String receipt) {
 		System.out.println(receipt);
 	}
-
 }

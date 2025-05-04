@@ -6,7 +6,6 @@ import se.kth.iv1350.cashiersystem.integration.ExternalInventory;
 
 
 public class Sale {
-
 	private SaleDTO currentSale;
 	private ExternalInventory inventory;
 
@@ -21,7 +20,7 @@ public class Sale {
 
 	/**
 	 * Adds an item to the sale if it exists in stock
-	 * @param item The item to add
+	 * @param itemID The itemID to add
 	 */
 	public ItemDTO addItem(String itemID) {
 		int currentQuantity = currentSale.quantityOfItemScanned(itemID);
@@ -55,12 +54,18 @@ public class Sale {
 		inventory.updateInventory(currentSale);
 	}
 
+	/**
+	 * Returns the current SaleDTO object
+	 * @return The current SaleDTO object
+	 */
 	public SaleDTO getSale() {
 		return currentSale;
 	}
 
+	/**
+	 * This method is a placeholder for the discount functionality.
+	 */
 	public double addDiscount(Discount discount) {
 		return 0.0;
 	}
-
 }

@@ -1,7 +1,6 @@
 package se.kth.iv1350.cashiersystem.integration;
 
 import java.util.ArrayList;
-
 import se.kth.iv1350.cashiersystem.dto.SaleDTO;
 import se.kth.iv1350.cashiersystem.model.Payment;
 import se.kth.iv1350.cashiersystem.model.Sale;

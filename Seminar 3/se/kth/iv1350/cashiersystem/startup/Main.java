@@ -25,12 +25,14 @@ public class Main {
 		view.sampleExecution();
 	}
 
-	
+	/**
+	 * Populates the inventory with some sample items.
+	 * @param inventory The inventory to populate with sample items.
+	 */
 	private static void populateInventory(ExternalInventory inventory) {
-		ItemDTO item1 = new ItemDTO("abc123", "BigWheel Oatmeal", 29.90, 6, "BigWheel Oatmeal 500 g, whole grain oats, high fiber, gluten free", 5);
-        ItemDTO item2 = new ItemDTO("def456", "YouGoGo Blueberry", 14.90, 6, "YouGoGo Blueberry 240 g, low sugar yoghurt, blueberry flavour", 5);
+		ItemDTO item1 = new ItemDTO("abc123", "BigWheel Oatmeal", 29.90, 6, "BigWheel Oatmeal 500 g, whole grain oats, high fiber, gluten free", 10);
+        ItemDTO item2 = new ItemDTO("def456", "YouGoGo Blueberry", 14.90, 6, "YouGoGo Blueberry 240 g, low sugar yoghurt, blueberry flavour", 10);
 		inventory.addItemToInventory(item1);
 		inventory.addItemToInventory(item2);
     }
-
 }

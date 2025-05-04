@@ -21,15 +21,29 @@ public class SaleDTO {
 		return totalPrice;
 	}
 
+	public boolean checkIfScannedItem (ItemDTO item) {
+		for (ItemDTO scannedItem : itemList) {
+			if (item == scannedItem) {
+				return true;
+			}
+		}
+		return false;
+	} 
+
 	public void addItemToSale(ItemDTO item) {
-		itemList.add(item);
+		if(!checkIfScannedItem(item)) {
+			itemList.add(item);
+		}
+		else {
+			item.setSaleQuantity(item.getSaleQuantity() + 1);
+		}  
 		totalPrice += item.getPrice();
 		totalVAT += item.getVatAmount();
 	}
 
 	public int quantityOfItemScanned(String itemID) {
 		int currentQuantityInSale = 0;
-		for (ItemDTO item: itemList) {
+		for (ItemDTO item : itemList) {
 			if (item.getID() == itemID) {
 				currentQuantityInSale += 1;
 			}

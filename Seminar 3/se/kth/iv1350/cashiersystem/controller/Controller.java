@@ -1,18 +1,18 @@
 package se.kth.iv1350.cashiersystem.controller;
 
-import se.kth.iv1350.cashiersystem.model.Sale;
+
+import se.kth.iv1350.cashiersystem.dto.ItemDTO;
 import se.kth.iv1350.cashiersystem.integration.DiscountDatabase;
 import se.kth.iv1350.cashiersystem.integration.ExternalAccounting;
 import se.kth.iv1350.cashiersystem.integration.ExternalInventory;
 import se.kth.iv1350.cashiersystem.integration.Printer;
 import se.kth.iv1350.cashiersystem.model.Discount;
-import se.kth.iv1350.cashiersystem.model.Register;
-import se.kth.iv1350.cashiersystem.model.Receipt;
 import se.kth.iv1350.cashiersystem.model.Payment;
-import se.kth.iv1350.cashiersystem.dto.ItemDTO;
+import se.kth.iv1350.cashiersystem.model.Receipt;
+import se.kth.iv1350.cashiersystem.model.Register;
+import se.kth.iv1350.cashiersystem.model.Sale;
 
 public class Controller {
-
 	private Sale sale;
 	private ExternalInventory externalInventory;
 	private ExternalAccounting externalAccounting;
@@ -21,6 +21,15 @@ public class Controller {
 	private Printer printer;
 	private Register register;
 
+
+	/**
+	 * Constructor for the Controller class
+	 * @param externalInventory The inventory system to be used for retrieving item information.
+	 * @param externalAccounting The accounting system which will be used for updating accounting records after a sale.
+	 * @param discountDatabase The database containing discount information.
+	 * @param printer The printer which will be used for printing receipts.
+	 * @param register The register which will be used for depositing "leftover" cash from customer payments.
+	 */
 	public Controller(ExternalInventory externalInventory, ExternalAccounting externalAccounting, DiscountDatabase discountDatabase, Printer printer, Register register) {
 		this.externalInventory = externalInventory;
 		this.externalAccounting = externalAccounting;
@@ -35,7 +44,6 @@ public class Controller {
 	 */
 	public void initializeSale() {
 		this.sale = new Sale(externalInventory);
-		Receipt receipt = new Receipt(sale.getSale());
 	}
 
 	/**
@@ -62,16 +70,15 @@ public class Controller {
 	}
 
 	public void endSale() {
-		Payment customerPayment = new Payment(100, this.sale);
+		Payment customerPayment = new Payment(100, sale.getSale());
+		customerPayment.calculateChange();
+		externalInventory.updateInventory(sale.getSale());
+		externalAccounting.updateAccounting(customerPayment);
+		Receipt receipt = new Receipt(sale.getSale(), customerPayment);
 		String receiptString = receipt.getReceipt();
 		printer.printReceipt(receiptString);
-
-		/**
-		 * Ta emot betalning, skicka till Register
-		 * Skapa Receipt
-		 * Skicka till Printer
-		 */
-
+		double amountToDeposit = customerPayment.getPaidAmount() - customerPayment.getChange();
+		register.deposit(amountToDeposit);
 	}
 
 	public Sale getSale() {

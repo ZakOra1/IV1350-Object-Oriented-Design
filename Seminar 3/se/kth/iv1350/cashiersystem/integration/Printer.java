@@ -1,8 +1,8 @@
 package se.kth.iv1350.cashiersystem.integration;
 
+import se.kth.iv1350.cashiersystem.dto.SaleDTO;
 import se.kth.iv1350.cashiersystem.model.Receipt;
 import se.kth.iv1350.cashiersystem.model.Sale;
-import se.kth.iv1350.cashiersystem.dto.SaleDTO;
 
 
 

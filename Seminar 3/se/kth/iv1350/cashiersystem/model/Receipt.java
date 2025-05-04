@@ -1,38 +1,49 @@
 package se.kth.iv1350.cashiersystem.model;
 
-import se.kth.iv1350.cashiersystem.integration.Printer;
-import se.kth.iv1350.cashiersystem.dto.SaleDTO;
-import se.kth.iv1350.cashiersystem.dto.ItemDTO;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import se.kth.iv1350.cashiersystem.dto.ItemDTO;
+import se.kth.iv1350.cashiersystem.dto.SaleDTO;
+import se.kth.iv1350.cashiersystem.integration.Printer;
 
 public class Receipt {
 
 	private SaleDTO sale;
+	private LocalDateTime timeOfSale;
+	private Payment customerPayment;
 
-	public Receipt(SaleDTO sale) {	
+	public Receipt(SaleDTO sale, Payment customerPayment) {	
 		this.sale = sale;
+		this.customerPayment = customerPayment;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		this.timeOfSale = LocalDateTime.now();
+		this.timeOfSale.format(formatter);
 	}
 
 	public String getReceipt() {
 		StringBuilder receipt = new StringBuilder();
 		receipt.append("------------------ Begin receipt ------------------\n");
-		receipt.append("Time of Sale : " + DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+		receipt.append("Time of Sale : " + timeOfSale + "\n\n");
 		//append(sale.getDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))).append("\n\n");
 
-		for (ItemDTO item: sale.getItems()) {
+		for (ItemDTO item : sale.getItems()) {
 			receipt.append(item.getName())
-				   .append(" ")
+				   .append("    ")
 				   .append(item.getSaleQuantity())
 				   .append(" x ")
 				   .append(String.format("%.2f", item.getPrice()))
-				   .append(" ")
+				   .append("     ")
 				   .append(String.format("%.2f", item.getTotalPrice()))
 				   .append(" SEK\n");
 		}
 
 		receipt.append("\n");
 		receipt.append("Total : ").append(String.format("%.2f", sale.getTotalPrice())).append(" SEK\n");
-		receipt.append("VAT : ").append(String.format("%.2f", sale.getVATAmount())).append("\n\n");
+		receipt.append("VAT : ").append(String.format("%.2f", sale.getVATAmount())).append("SEK").append("\n\n");
+		receipt.append("Cash: " + customerPayment.getPaidAmount()).append(" SEK\n");
+		receipt.append("Change: ").append(String.format("%.2f", customerPayment.getChange())).append(" SEK\n");
+		
 		//receipt.append("Cash : ").append(String.format("%.2f", sale.getPaidAmount())).append(" SEK\n");
 		//receipt.append("Change : ").append(String.format("%.2f", sale.getChange())).append(" SEK\n");
 		receipt.append("------------------ End receipt ------------------\n");

@@ -44,15 +44,9 @@ public class ExternalInventory {
 	}
 
 	/**
-	 * Updates the available quantities after a sale has ended
+	 * Updates the available quantities after a sale has ended (Doesn't actually do anything, not included in seminar task)
 	 * @param sale SaleDTO object containing information about which items has been sold, as well as how many of each item
 	 */
 	public void updateInventory(SaleDTO sale) {
-		for (ItemDTO soldItem : sale.getItems()) {
-			ItemDTO itemInInventory = inventory.get(soldItem.getID());
-			int updatedQuantity = itemInInventory.getStockQuantity() - soldItem.getSaleQuantity();
-			itemInInventory.setSaleQuantity(0);
-			itemInInventory.setStockQuantity(updatedQuantity);
-			}
 	}
 }

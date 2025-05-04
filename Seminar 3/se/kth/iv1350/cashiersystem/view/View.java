@@ -30,6 +30,8 @@ public class View {
 		printScannedItemInfo(item1);
 		ItemDTO item2 = contr.scanItem("def456", 1); 
 		printScannedItemInfo(item2);
+		ItemDTO item3 = contr.scanItem("def456", 1); 
+		printScannedItemInfo(item3);
 		contr.endSale();
 		
 	}
@@ -43,12 +45,12 @@ public class View {
 						"\nItem name: " + scannedItem.getName() + 
 						"\nItem cost: " + scannedItem.getPrice() + 
 						"\nVAT: " + scannedItem.getVatRate() + "%" +
-						"\nItem quantity: " + scannedItem.getSaleQuantity() +
-						"\nItem description: " + scannedItem.getDescription()
+						"\nItem description: " + scannedItem.getDescription() +
+						"\n"				
 						);
 
 		System.out.println("Total cost (incl VAT): " + String.format("%.2f", contr.getSale().getTotalPrice()));
-		System.out.println("Total VAT: " + String.format("%.2f", contr.getSale().getTotalVat()));
+		System.out.println("Total VAT: " + String.format("%.2f", contr.getSale().getTotalVat()) + "\n\n");
 	}
 
 

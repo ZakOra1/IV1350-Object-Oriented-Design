@@ -5,22 +5,14 @@ import se.kth.iv1350.cashiersystem.integration.Printer;
 public class Register {
 
 	private double balance;
-	private Payment payment;
 
 	public Register() {
-	}
-
-	public void PrintReceipt(Receipt receipt) {
-		Printer printer = new Printer();
-		//printer.printReceipt(receipt);
+		this.balance = 0;
 	}
 
 	public void deposit(double customerPayment) {
-
+		this.balance += customerPayment;
 	}
 
-	public void withdraw(double customerChange) {
-
-	}
 
 }

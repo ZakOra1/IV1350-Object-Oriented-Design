@@ -1,7 +1,7 @@
 package se.kth.iv1350.cashiersystem.model;
 
-import se.kth.iv1350.cashiersystem.dto.SaleDTO;
 import se.kth.iv1350.cashiersystem.dto.ItemDTO;
+import se.kth.iv1350.cashiersystem.dto.SaleDTO;
 import se.kth.iv1350.cashiersystem.integration.ExternalInventory;
 
 
@@ -57,6 +57,10 @@ public class Sale {
 
 	public SaleDTO getSale() {
 		return currentSale;
+	}
+
+	public double addDiscount(Discount discount) {
+		return 0.0;
 	}
 
 }
